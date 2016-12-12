@@ -1,5 +1,11 @@
 package com.waterpurifier.utils;
 
+import com.taobao.api.ApiException;
+import com.taobao.api.DefaultTaobaoClient;
+import com.taobao.api.TaobaoClient;
+import com.taobao.api.request.AlibabaAliqinFcSmsNumSendRequest;
+import com.taobao.api.response.AlibabaAliqinFcSmsNumSendResponse;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.Random;
@@ -26,7 +32,22 @@ public class Common {
         return String.valueOf(randomInt);
     }
 
-    public static void sendMessage(String tel, String code) {
-
+    public static boolean sendMessage(String tel, String code) {
+        try {
+            TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", "appKey", "appSecret");
+            AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
+            req.setExtend("");
+            req.setSmsType("normal");
+            req.setSmsFreeSignName("七星博士");
+            req.setSmsParamString("{\"code\":\"" + code + "\"}");
+            req.setRecNum(tel);
+            req.setSmsTemplateCode("SMS_25781236");
+            AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
+            System.out.println(rsp.getBody());
+            return true;
+        } catch (ApiException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }

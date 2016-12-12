@@ -93,11 +93,31 @@
       <version>20160810</version>
     </dependency>
 -->
+    <!-- mvn install:install-file  -DgroupId=taobao -DartifactId=taobao -Dversion=1.0 -Dpackaging=jar -Dfile=src/main/webapp/WEB-INF/lib/taobao-sdk-java-auto_1455552377940-20160607.jar -->
+    <!-- http://www.cnblogs.com/hyhnet/p/5775473.html -->
+    <dependency>
+      <groupId>taobao</groupId>
+      <artifactId>taobao</artifactId>
+      <version>1.0</version>
+    </dependency>
 
   </dependencies>
 
   <build>
     <finalName>waterpurifier_api</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.6</source>
+          <target>1.6</target>
+          <encoding>UTF-8</encoding>
+          <compilerArguments>
+            <extdirs>src\main\webapp\WEB-INF\lib</extdirs>
+          </compilerArguments>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 
 </project>

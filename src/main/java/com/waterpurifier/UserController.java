@@ -73,14 +73,20 @@ public class UserController {
             auth.code = code;
             auth.created = Double.valueOf(new Date().getTime());
             authDao.insert(auth);
-            Common.sendMessage(tel, code);
-            return new Result(1, null, null);
+            if(Common.sendMessage(tel, code)) {
+                return new Result(1, null, null);
+            } else {
+                return new Result(-1, "验证码发送失败，请稍后再试", null);
+            }
         } else {
             double created = auth.created;
             if(new Date().getTime() - created > 1800000) {
                 authDao.update(auth._id, code, new Date().getTime());
-                Common.sendMessage(tel, code);
-                return new Result(1, null, null);
+                if(Common.sendMessage(tel, code)) {
+                    return new Result(1, null, null);
+                } else {
+                    return new Result(-1, "验证码发送失败，请稍后再试", null);
+                }
             } else {
                 return new Result(-1, "验证码未过期,请勿频繁请求验证码.", null);
             }
