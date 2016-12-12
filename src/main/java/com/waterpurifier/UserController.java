@@ -88,7 +88,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/request_code", method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Result register(@RequestBody Map body) {
         String tel = body.get("tel").toString();
         User user = userDao.findByTel(tel);

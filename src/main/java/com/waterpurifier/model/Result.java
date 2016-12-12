@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by bin.shen on 11/12/2016.
  */
+
 public class Result implements Serializable {
 
     public int code;

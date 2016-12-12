@@ -8,11 +8,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document
-public class Auth extends BaseModel {
+public class Version extends BaseModel {
 
-    public String tel;
+    public int type;
 
-    public String code;
-
-    public Double created;
+    public float version;
 }
