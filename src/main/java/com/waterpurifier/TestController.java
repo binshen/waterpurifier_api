@@ -66,7 +66,8 @@ public class TestController {
 //        user.password = Common.getMD5("passw0rd");
 //        userDao.insert(user);
 
-        User user = userDao.login("1111111", "888888");
+//        User user = userDao.login("1111111", "888888");
+        User user = userDao.findByTel("18118438026");
 
         return new Result(1, null, user);
     }

@@ -115,12 +115,37 @@ public class UserController {
 
         user = new User();
         user.tel = tel;
-        user.gender = Integer.parseInt(body.get("gender").toString());
-        user.amount = new BigDecimal(body.get("amount").toString()).setScale(2, BigDecimal.ROUND_HALF_UP);
-        user.name = body.get("name").toString();
+        user.gender = 1;//Integer.parseInt(body.get("gender").toString());
+        user.amount = new BigDecimal(0);//new BigDecimal(body.get("amount").toString()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        user.name = "test";//body.get("name").toString();
         user.password = Common.getMD5(body.get("password").toString());
         userDao.insert(user);
 
+        return new Result(1, null, null);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/forget_password", method = RequestMethod.POST)
+    public Result forgetPassword(@RequestBody Map body) {
+        String tel = body.get("tel").toString();
+        User user = userDao.findByTel(tel);
+        if(user == null) {
+            return new Result(-1, "您输入的手机号码不存在.", null);
+        }
+
+        String code = body.get("code").toString();
+        Auth auth = authDao.findByTelAndCode(tel, code);
+        if(auth == null) {
+            return new Result(-1, "您发送的验证码不正确.", null);
+        }
+
+        double create = auth.created;
+        if(new Date().getTime() - create > 1800000) {
+            return new Result(-1, "您发送的验证码已过期.", null);
+        }
+
+        String password = Common.getMD5(body.get("password").toString());
+        userDao.changePassword(user._id, password);
         return new Result(1, null, null);
     }
 

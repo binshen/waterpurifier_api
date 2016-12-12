@@ -9,12 +9,12 @@ import java.io.Serializable;
 public class Result implements Serializable {
 
     public int code;
-    public String message;
+    public String error;
     public Serializable content;
 
-    public Result(int code, String message, Serializable content) {
+    public Result(int code, String error, Serializable content) {
         this.code = code;
-        this.message = message;
+        this.error = error;
         this.content = content;
     }
 }
