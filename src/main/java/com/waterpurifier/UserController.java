@@ -119,7 +119,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{user_id}/change_psw", method = RequestMethod.POST)
+    @RequestMapping(value = "/{user_id}/change_password", method = RequestMethod.POST)
     public Result changePassword(@PathVariable("user_id") String id, @RequestBody Map body) {
         String password = Common.getMD5(body.get("password").toString());
         String new_password = Common.getMD5(body.get("new_password").toString());
@@ -139,6 +139,22 @@ public class UserController {
         feedback.userID = id;
         feedback.feedback = body.get("feedback").toString();
         feedbackDao.insert(feedback);
+        return new Result(1, null, null);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{user_id}/update_name", method = RequestMethod.POST)
+    public Result updateName(@PathVariable("user_id") String id, @RequestBody Map body) {
+        String name = body.get("name").toString();
+        userDao.changeName(id, name);
+        return new Result(1, null, null);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/{user_id}/update_password", method = RequestMethod.POST)
+    public Result updatePassword(@PathVariable("user_id") String id, @RequestBody Map body) {
+        String password = body.get("password").toString();
+        userDao.changePassword(id, password);
         return new Result(1, null, null);
     }
 }

@@ -43,6 +43,10 @@ public class UserDao {
         return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel)), User.class, collectionName);
     }
 
+    public void changeName(String id, String name) {
+        mongoTemplate.upsert(new Query(Criteria.where("_id").is(id)), new Update().set("name", name), User.class, collectionName);
+    }
+
     public void changePassword(String id, String password) {
         mongoTemplate.upsert(new Query(Criteria.where("_id").is(id)), new Update().set("password", password), User.class, collectionName);
     }
