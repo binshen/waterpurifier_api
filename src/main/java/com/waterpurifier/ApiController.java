@@ -32,9 +32,7 @@ public class ApiController {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public List<User> test(HttpServletRequest request) {
 
-        Map<String,Object> params = new HashMap<String,Object>();
-        List<User> users = userDao.findAll(params, "users");
-        return users;
+        return userDao.findAll();
     }
 
 

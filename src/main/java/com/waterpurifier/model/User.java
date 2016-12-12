@@ -1,5 +1,7 @@
 package com.waterpurifier.model;
 
+import com.waterpurifier.base.BaseModel;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -7,7 +9,7 @@ import java.math.BigDecimal;
  * Created by bin.shen on 10/12/2016.
  */
 
-public class User implements Serializable {
+public class User extends BaseModel {
 
     public String tel;
 

@@ -1,6 +1,5 @@
 package com.waterpurifier.dao;
 
-import com.waterpurifier.base.MongoBase;
 import com.waterpurifier.model.User;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -10,44 +9,45 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by bin.shen on 10/12/2016.
  */
 
 @Repository("UserDao")
-public class UserDao implements MongoBase<User> {
+public class UserDao {
+
+    private final String collectionName = "users";
 
     @Resource
     private MongoTemplate mongoTemplate;
 
-    public void insert(User object, String collectionName) {
-        mongoTemplate.insert(object, collectionName);
+    public User findById(String id) {
+        return mongoTemplate.findById(id, User.class);
     }
 
-    public void createCollection(String collectionName) {
-        mongoTemplate.createCollection(collectionName);
-    }
-
-    public User findOne(Map<String, Object> params, String collectionName) {
-        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(params.get("id"))), User.class, collectionName);
-    }
-
-    public List<User> findAll(Map<String, Object> params, String collectionName) {
+    public List<User> findAll() {
         return mongoTemplate.find(new Query(), User.class, collectionName);
     }
 
-    public void update(Map<String, Object> params, String collectionName) {
-        mongoTemplate.upsert(new Query(Criteria.where("_id").is(params.get("id"))), new Update().set("name", params.get("name")), User.class, collectionName);
-    }
 
-    public void remove(Map<String, Object> params, String collectionName) {
-        mongoTemplate.remove(new Query(Criteria.where("_id").is(params.get("id"))), User.class, collectionName);
-    }
-
-    ///////////////////////////////////////////////////
     public User login(String tel, String password) {
-        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).where("password").is(password)), User.class, "users");
+        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).where("password").is(password)), User.class, collectionName);
+    }
+
+    public User fetchUser(String id, String password) {
+        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id).where("password").is(password)), User.class, collectionName);
+    }
+
+    public User findByTel(String tel) {
+        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel)), User.class, collectionName);
+    }
+
+    public void changePassword(String id, String password) {
+        mongoTemplate.upsert(new Query(Criteria.where("_id").is(id)), new Update().set("password", password), User.class, collectionName);
+    }
+
+    public void insert(User user) {
+        mongoTemplate.insert(user, collectionName);
     }
 }

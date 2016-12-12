@@ -1,5 +1,6 @@
 package com.waterpurifier.model;
 
+import com.waterpurifier.base.BaseModel;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -9,9 +10,7 @@ import java.io.Serializable;
  */
 
 @Document
-public class Device implements Serializable {
-
-    public String _id;
+public class Device extends BaseModel {
 
     public String mac;
 
