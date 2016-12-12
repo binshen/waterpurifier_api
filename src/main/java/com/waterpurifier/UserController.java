@@ -109,8 +109,8 @@ public class UserController {
 
         user = new User();
         user.tel = tel;
-        user.gender = 1;
-        user.amount = new BigDecimal(0);
+        user.gender = Integer.parseInt(body.get("gender").toString());
+        user.amount = new BigDecimal(body.get("amount").toString()).setScale(2, BigDecimal.ROUND_HALF_UP);
         user.name = body.get("name").toString();
         user.password = Common.getMD5(body.get("password").toString());
         userDao.insert(user);
