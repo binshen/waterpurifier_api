@@ -26,7 +26,7 @@ public class AuthDao {
     }
 
     public Auth findByTelAndCode(String tel, String code) {
-        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).where("code").is(code)), Auth.class, collectionName);
+        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).and("code").is(code)), Auth.class, collectionName);
     }
 
     public void update(String id, String code, double created) {

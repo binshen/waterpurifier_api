@@ -32,11 +32,11 @@ public class UserDao {
 
 
     public User login(String tel, String password) {
-        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).where("password").is(password)), User.class, collectionName);
+        return mongoTemplate.findOne(new Query(Criteria.where("tel").is(tel).and("password").is(password)), User.class, collectionName);
     }
 
     public User fetchUser(String id, String password) {
-        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id).where("password").is(password)), User.class, collectionName);
+        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id).and("password").is(password)), User.class, collectionName);
     }
 
     public User findByTel(String tel) {

@@ -58,13 +58,15 @@ public class TestController {
 //            return new Result(-1, "验证码未过期,请勿频繁请求验证码.", null);
 //        }
 
-        User user = new User();
-        user.tel = "13513513555";
-        user.gender = 0;
-        user.amount = new BigDecimal(305.20).setScale(2, BigDecimal.ROUND_HALF_UP);
-        user.name = "my name 3";
-        user.password = Common.getMD5("passw0rd");
-        userDao.insert(user);
+//        User user = new User();
+//        user.tel = "13513513555";
+//        user.gender = 0;
+//        user.amount = new BigDecimal(305.20).setScale(2, BigDecimal.ROUND_HALF_UP);
+//        user.name = "my name 3";
+//        user.password = Common.getMD5("passw0rd");
+//        userDao.insert(user);
+
+        User user = userDao.login("1111111", "888888");
 
         return new Result(1, null, user);
     }
