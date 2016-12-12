@@ -8,8 +8,11 @@ import com.waterpurifier.utils.Common;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println(Common.getMD5("888888"));
-    }
+        //System.out.println(Common.getMD5("888888"));
 
+        for(int i=0; i<1000; i++) {
+            System.out.println(Common.getRandom());
+        }
+    }
 
 }

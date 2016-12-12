@@ -2,6 +2,7 @@ package com.waterpurifier.utils;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
+import java.util.Random;
 
 /**
  * Created by bin.shen on 11/12/2016.
@@ -18,5 +19,14 @@ public class Common {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getRandom() {
+        int randomInt = (int)((Math.random() * 9 + 1) * 100000);
+        return String.valueOf(randomInt);
+    }
+
+    public static void sendMessage(String tel, String code) {
+
     }
 }

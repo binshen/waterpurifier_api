@@ -37,18 +37,5 @@ public class ApiController {
         return users;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(@RequestBody Map body) {
 
-        String tel = body.get("tel").toString();
-        String password = Common.getMD5(body.get("password").toString());
-
-        User user = userDao.login(tel, password);
-        if(user != null) {
-            return new Result(0, null, user);
-        } else {
-            return new Result(-1, "输入的手机号或密码错误.", user);
-        }
-    }
 }
