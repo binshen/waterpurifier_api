@@ -19,7 +19,5 @@ public class User extends BaseModel {
 
     public String name;
 
-    public int gender;
-
     public BigDecimal amount;
 }
