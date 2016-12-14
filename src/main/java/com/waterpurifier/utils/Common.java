@@ -33,6 +33,26 @@ public class Common {
     }
 
     public static boolean sendMessage(String tel, String code) {
+        String testUsername = "xxxx";
+        String testPassword = "yyyy";
+        String testContent = "【淼溪信息科技】您的验证码是" + code + ",５分钟内有效。若非本人操作请忽略此消息。";
+        String httpUrl = "http://api.smsbao.com/sms";
+        StringBuffer httpArg = new StringBuffer();
+        try {
+            httpArg.append("u=").append(testUsername).append("&");
+            httpArg.append("p=").append(Sms.md5(testPassword)).append("&");
+            httpArg.append("m=").append(tel).append("&");
+            httpArg.append("c=").append(Sms.encodeUrlString(testContent, "UTF-8"));
+            String result = Sms.request(httpUrl, httpArg.toString());
+            System.out.println(result);
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public static boolean sendMessage2(String tel, String code) {
         try {
             TaobaoClient client = new DefaultTaobaoClient("http://gw.api.taobao.com/router/rest", "appKey", "appSecret");
             AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
