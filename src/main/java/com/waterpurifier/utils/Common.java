@@ -33,9 +33,9 @@ public class Common {
     }
 
     public static boolean sendMessage(String tel, String code) {
-        String testUsername = "xxxx";
-        String testPassword = "yyyy";
-        String testContent = "【拉拉秀平台】您的验证码是" + code + ",５分钟内有效。若非本人操作请忽略此消息。";
+        String testUsername = "xxxxx";
+        String testPassword = "yyyyy";
+        String testContent = "【拉拉秀】您的验证码是" + code + ",30分钟内有效。若非本人操作请忽略此消息。";
         String httpUrl = "http://api.smsbao.com/sms";
         StringBuffer httpArg = new StringBuffer();
         try {
